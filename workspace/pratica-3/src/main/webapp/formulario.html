@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<meta charset="ISO-8859-1">
+<title>Criar PDF</title>
+</head>
+<body>
+	<form action="create" method="get">
+		Login <input type="text" name="login"><br> <br> Nome
+		<input type="text" " name="nome"> <br> <br> <select
+			name="tipo">Status
+			<option value="colaborador">Colaborador</option>
+			<option value="gerente">Gerente</option>
+			<option value="admin">Admin</option>
+		</select> <br>Ativo<input type="checkbox" value="ativo" name="status">
+		<br> <br>Data<input type="date" name="data"> <br>
+		<br>Nível<br><input type="checkbox" name="nivel" value="graduação">Graduação
+		<input type="checkbox" name="nivel" value="mestrado"> Mestrado
+		<input type="checkbox" name="nivel" value="especialização">Especialização
+		<input type="checkbox" name="nivel" value="doutorado">Doutorado
+
+		<br><br><input type="submit" value="enviar">
+	</form>
+</body>
+</html>
