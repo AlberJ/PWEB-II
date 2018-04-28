@@ -32,6 +32,7 @@ public class ValidaLogin extends HttpServlet {
 		if (passwdFile.containsKey(login) && senha.equals(passwdFile.get(login))) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("logado", login);
+			session.setMaxInactiveInterval(10);
 			request.getRequestDispatcher("pagina1.jsp").forward(request, response);
 		} else {
 			request.setAttribute("erro", "Dados inválidos");
