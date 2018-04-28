@@ -7,6 +7,6 @@
 <title>págiana de ajuda</title>
 </head>
 <body>
-	<h1>Página de ajududa ao usuário.</h1>
+	<h1>Página de ajududa ao usuário...</h1>
 </body>
 </html>
