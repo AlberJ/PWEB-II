@@ -17,7 +17,7 @@ public class ServletC extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		out.println("<h1>Servlet C exeutou seu serviço e encaminhou a requisição...</h1>");
-		System.out.println("Servlet C exeutou seu serviço e encaminhou a requisição..");
+		System.out.println("Servlet C exeutou seu serviço e encaminhou a requisição...");
 		request.getRequestDispatcher("a.do").forward(request, response);
 	}
 
