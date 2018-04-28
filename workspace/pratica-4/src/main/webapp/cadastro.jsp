@@ -25,6 +25,7 @@
 		Autor <input type="text" name="autor"> <br> <br>
 		Publicado<input type="date" name="publicado"> <br> <br>
 		Páginas <input type="text" name="paginas"> <br> <br>
+		<br>
 		<button type="submit">Cadastrar</button>
 	</form>
 </body>
