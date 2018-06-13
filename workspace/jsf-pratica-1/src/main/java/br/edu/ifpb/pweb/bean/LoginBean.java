@@ -1,7 +1,7 @@
 package br.edu.ifpb.pweb.bean;
 
-import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
@@ -33,8 +33,8 @@ public class LoginBean {
 			return "sucesso?faces-redirect=true";
 		}
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Usu·rio  e/ou  senha  inv·lidos.",
-				"Verifique  se  CAPSLOCK  est·  ativada."));
+		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Usu√°rio  e/ou  senha  inv√°lidos.",
+				"Verifique  se  CAPSLOCK  est√°  ativada."));
 		return null;
 	}
 }
