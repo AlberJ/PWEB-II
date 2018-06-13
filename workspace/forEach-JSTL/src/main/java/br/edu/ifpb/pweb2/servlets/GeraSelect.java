@@ -17,7 +17,6 @@ public class GeraSelect extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
 		if (session.getAttribute("opcoes") != null) {
 			ArrayList<String> itens = (ArrayList) session.getAttribute("opcoes");
 			itens.add(request.getParameter("novo_item"));
