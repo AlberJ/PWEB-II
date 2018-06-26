@@ -33,8 +33,8 @@ public class LoginBean {
 			return "sucesso?faces-redirect=true";
 		}
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Usu·rio  e/ou  senha  inv·lidos.",
-				"Verifique  se  CAPSLOCK  est·  ativada."));
+		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Usu√°rio  e/ou  senha  inv√°lidos.",
+				"Verifique  se  CAPSLOCK  est√°  ativada."));
 		return null;
 	}
 }
