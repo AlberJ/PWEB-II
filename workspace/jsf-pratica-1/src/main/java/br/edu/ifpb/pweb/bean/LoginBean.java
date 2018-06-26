@@ -1,11 +1,11 @@
 package br.edu.ifpb.pweb.bean;
 
-import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-@ManagedBean(value = "loginBean")
+@ManagedBean(name = "loginBean")
 @RequestScoped
 public class LoginBean {
 

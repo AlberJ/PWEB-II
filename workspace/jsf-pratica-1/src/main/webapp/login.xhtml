@@ -9,20 +9,23 @@
 <h:head>
 	<title>Login</title>
 </h:head>
-<h:body>
-	<h:messages errorStyle="color:red" />
-	<h:form>
-		Login :<h:inputText id="login" value="#{loginBean.login}"
-			required="true">
-			<f:validateLength min="5" maximum="10"/>
-		</h:inputText>
-		<br />
-		<br />
-		Senha :<h:inputSecret id="senha" value="#{loginBean.senha}"
-			required="true" />
-		<br />
-		<br />
-		<h:commandButton value="Logar" action="#{loginBean.autentique}" />
-	</h:form>
+<h:body style="background-color: black;">
+	<div
+		style="width: 10%; margin-left: 40%; margin-right: 40%; margin-top: 10%; background-color: white; padding: 10px; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px;">
+		<h:form id="login">
+		Login <h:inputText id="login" value="#{loginBean.login}"
+				required="true">
+				<f:validateLength min="5" maximum="10" />
+			</h:inputText>
+			<br />
+			<br />
+		Senha <h:inputSecret id="senha" value="#{loginBean.senha}"
+				required="true"></h:inputSecret>
+			<br />
+			<br />
+			<h:commandButton value="Logar" action="#{loginBean.autentique}" />
+			<h:messages errorStyle="color:red" />
+		</h:form>
+	</div>
 </h:body>
 </html>
