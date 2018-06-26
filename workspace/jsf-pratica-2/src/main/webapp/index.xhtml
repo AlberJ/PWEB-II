@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<h:body>
+	<h1>Componentes do JSF</h1>
+	<h:outputLabel value="Mensagem:  " for="mensagem" />
+	<h:outputText value="#{bean.mensagem}" id="mensagem"
+		style="font-weight:  bold;" />
+
+	<h2>Formulários</h2>
+	<h:form id="form1">
+		<h3>Botões e links com ação</h3>
+		<h:outputLabel value="Nome:" for="nome"></h:outputLabel>
+		<h:inputText value="#{bean.nome}" id="nome"></h:inputText>
+
+		<h:commandButton action="#{bean.maiusculas}" value="Maiúsculas"></h:commandButton>
+		<h:commandLink action="#{bean.minusculas}" value="Minúsculas"></h:commandLink>
+
+	</h:form>
+
+	<h3>Campo obrigatório</h3>
+	<h:form id="form2">
+		<h:outputLabel value="Nome:" for="nome" />
+		<requiredMessage></requiredMessage>
+		<h:inputText value="#{bean.nome}" id="nome" required="true"></h:inputText>
+		<h:commandButton action="#{bean.maiusculas}" value="Maiúsculas"></h:commandButton>*obrigatório <h:message
+			for="nome" errorStyle="color:red;" />
+	</h:form>
+
+	<h3>Faixa de valores inteiros</h3>
+	<h:form id="form3">
+		<h:outputLabel value="Idade:" for="idade" />
+		<h:inputText value="#{bean.idade}" id="idade">
+			<f:validateLongRange minimum="18" maximum="90" />
+		</h:inputText>(entre  18  e  90)<h:outputText value="#{bean.faixa}" />
+		<h:message for="idade" errorStyle="color:red;" />
+		<br />
+		<h:commandButton action="#{bean.calculeFaixa}" value="Calcule  faixa" />
+	</h:form>
+</h:body>
+</html>
