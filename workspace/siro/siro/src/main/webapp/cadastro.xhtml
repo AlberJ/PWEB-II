@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>SIRO - Cadastro de Ocorrência</title>
+	<h:outputStylesheet library="bootstrap" name="css/bootstrap.css"
+		target="head" />
+	<h:outputStylesheet library="css" name="siro.css" target="head" />
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<h1>SIRO</h1>
+		<h3>Sistema de Registro de ocorrências</h3>
+		<p:tabView id="tab">
+			<p:tab title="Natureza">
+				<p:fieldset>
+				Natureza <h:selectOneMenu value="#{ocorrenciaBean.natureza}">
+						<f:selectItem itemLabel="Roubo" itemValue="1" />
+						<f:selectItem itemLabel="Estelionado" itemValue="2" />
+						<f:selectItem itemLabel="Extravio" itemValue="3" />
+						<f:selectItem itemLabel="Furto" itemValue="4" />
+						<f:selectItem itemLabel="Ameaça" itemValue="5" />
+						<f:selectItem itemLabel="Lesão Corporal" itemValue="6" />
+					</h:selectOneMenu>
+				</p:fieldset>
+			</p:tab>
+
+			<!-- ############################################### ENVOLVIDOS ############################################### -->
+
+
+
+			<p:tab title="Envolvidos" id="tabEnvolvidos">
+				<p:fieldset>
+
+					<h:outputLabel value="Nome"
+						style="padding-right:1%; padding-left:1%" />
+					<h:inputText id="nome" value="#{ocorrenciaBean.envolvido.nome}" />
+
+					<h:outputLabel value="Apelido"
+						style="padding-right:1%; padding-left:1%" />
+					<h:inputText id="apelido"
+						value="#{ocorrenciaBean.envolvido.apelido}" />
+
+					<h:outputLabel value="Endereço"
+						style="padding-right:2.3%; padding-left:1%" />
+					<h:inputText id="endereco"
+						value="#{ocorrenciaBean.envolvido.endereco}" />
+
+					<h:outputLabel value="Telefone"
+						style="padding-right:2%; padding-left:2%" />
+					<h:inputText id="telefone"
+						value="#{ocorrenciaBean.envolvido.telefone}" style="width:8.5%" />
+
+					<h:outputLabel value="Documento"
+						style="padding-right:1%; padding-left:1%" />
+					<h:inputText id="documento"
+						value="#{ocorrenciaBean.envolvido.documento}" style="width:7%" />
+
+					<br />
+					<br />
+
+					<h:outputLabel value="Mae"
+						style="padding-right:1%; padding-left:1%; padding-right:2%" />
+					<h:inputText id="mae" value="#{ocorrenciaBean.envolvido.mae}" />
+
+					<h:outputLabel value="Pai"
+						style="padding-right:1%; padding-left:1%; padding-right:3.6%" />
+					<h:inputText id="pai" value="#{ocorrenciaBean.envolvido.pai}" />
+
+					<h:outputLabel value="Nascimento"
+						style="padding-right:1%; padding-left:1%" />
+					<p:calendar id="nascimento"
+						value="#{ocorrenciaBean.envolvido.nascimento}" />
+
+					<h:outputLabel value="Papel"
+						style="padding-right:1%; padding-left:2%;margin-right:2%" />
+
+					<h:selectOneMenu value="#{ocorrenciaBean.envolvido.participacao}"
+						style="height:30px">
+						<f:selectItem itemLabel="Autor" itemValue="1" />
+						<f:selectItem itemLabel="Vítima" itemValue="2" />
+						<f:selectItem itemLabel="Testemunha" itemValue="3" />
+						<f:selectItem itemLabel="Noticiante" itemValue="4" />
+						<f:selectItem itemLabel="Suspeito" itemValue="5" />
+						<f:selectItem itemLabel="Outros" itemValue="6" />
+					</h:selectOneMenu>
+
+					<h:commandButton id="btInserir" value="Inserir"
+						styleClass="form-control btn btn-primary"
+						style="width:15%; margin-left:1%">
+
+						<f:ajax event="click" execute="@form"
+							listener="#{ocorrenciaBean.inserirEnvolvido}"
+							render="form:tab:envolvidos
+							           form:tab:proprietarios
+							           form:tab:nome
+							           form:tab:telefone 
+							           form:tab:endereco 
+							           form:tab:documento
+							           form:tab:nascimento
+							           form:tab:apelido
+							           form:tab:mae 
+							           form:tab:pai
+							           form:tab:selectPropriedade
+							           for:tab:selectPosse" />
+					</h:commandButton>
+				</p:fieldset>
+
+				<h:panelGroup id="envolvidos">
+					<p:dataTable value="#{ocorrenciaBean.envolvidos}" var="envolvido"
+						rendered="#{not empty ocorrenciaBean.envolvidos}"
+						style="width:60%">
+						<p:column headerText="Nome">
+							#{envolvido.nome}
+						</p:column>
+						<p:column headerText="Apelido">
+							#{envolvido.apelido}
+						</p:column>
+
+						<p:column headerText="Endereço">
+							#{envolvido.endereco}
+						</p:column>
+
+						<p:column headerText="Documento">
+							#{envolvido.documento}
+						</p:column>
+
+						<p:column headerText="Mãe">
+							#{envolvido.mae}
+						</p:column>
+
+						<p:column headerText="Pai">
+							#{envolvido.pai}
+						</p:column>
+
+						<p:column headerText="Nascimento">
+							<h:outputText value="#{envolvido.nascimento}">
+								<f:convertDateTime locale="pt_BR" dateStyle="long"
+									pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+
+					</p:dataTable>
+				</h:panelGroup>
+
+
+				<!-- ############################################### OBJETOS ############################################### -->
+
+			</p:tab>
+			<p:tab title="Objetos" id="tabObjetos">
+
+				<p:fieldset>
+					<h:panelGroup id="proprietarios">
+						<h:outputLabel value="Categoria"
+							style="padding-right:1%; padding-left:1%" />
+
+						<h:selectOneMenu value="#{ocorrenciaBean.objeto.categoria}"
+							style="height:30px">
+							<f:selectItem itemLabel="Veiculo" itemValue="1" />
+							<f:selectItem itemLabel="Eletro eletrônico" itemValue="2" />
+							<f:selectItem itemLabel="Arma de fogo" itemValue="3" />
+							<f:selectItem itemLabel="Arma Branca" itemValue="4" />
+							<f:selectItem itemLabel="Entorpecente" itemValue="5" />
+							<f:selectItem itemLabel="Documento" itemValue="6" />
+						</h:selectOneMenu>
+
+
+						<h:outputLabel value="Descrição"
+							style="padding-right:1%; padding-left:1%" />
+						<h:inputText id="descricao"
+							value="#{ocorrenciaBean.objeto.descricao}" />
+
+						<h:outputLabel value="Valor"
+							style="padding-right:1%; padding-left:1%" />
+						<h:inputText id="valor" value="#{ocorrenciaBean.objeto.valor}" />
+
+
+						<h:outputLabel value="Pertence a "
+							style="padding-right:1%; padding-left:1%" />
+
+						<h:selectOneMenu value="#{ocorrenciaBean.objeto.propriedade}"
+							id="selectPropriedade">
+							<f:converter converterId="EnvolvidoConverter" />
+							<f:selectItems value="#{ocorrenciaBean.envolvidos}"
+								var="envolvido" itemLabel="#{envolvido.nome}"
+								itemValue="#{envolvido.telefone}" />
+						</h:selectOneMenu>
+						
+						<h:outputLabel value="Foi utilizado por "
+							style="padding-right:1%; padding-left:1%" />
+
+						<h:selectOneMenu value="#{ocorrenciaBean.objeto.propriedade}"
+							id="selectPosse">
+							<f:converter converterId="EnvolvidoConverter" />
+							<f:selectItems value="#{ocorrenciaBean.envolvidos}"
+								var="envolvido" itemLabel="#{envolvido.nome}"
+								itemValue="#{envolvido.telefone}" />
+						</h:selectOneMenu>
+						
+						
+					</h:panelGroup>
+
+
+
+
+
+				</p:fieldset>
+			</p:tab>
+
+			<p:tab title="Complemento">
+				<p:panelGrid columns="2" cellpadding="10">
+					<h:form>
+						<h3 style="margin-top: 0">Complemento</h3>
+						<p:inputTextarea rows="10" cols="160"
+							value="#{ocorrenciaBean.complemento}" />
+					</h:form>
+				</p:panelGrid>
+
+				<h:commandButton id="bt_ocorrencia"
+					action="#{ocorrenciaBean.salvar}" value="Gravar ocorrência"
+					styleClass="form-control btn btn-primary" />
+			</p:tab>
+		</p:tabView>
+	</h:form>
+</h:body>
+</html>
