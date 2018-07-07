@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:body>
+	<h:form id="matricula_aluno">
+		<h:outputLabel value="Matriculando novo aluno da turma de #{turmasBean.turma.nome}" id="id_turma"></h:outputLabel>
+		<br></br>
+		<br></br>
+    Nome 
+		<h:inputText value="#{turmasBean.nome_aluno}" required="true"
+			id="nome" />
+		<br />
+		<br />
+	Matricula <h:inputText value="#{turmasBean.matricula}" required="true"
+			id="matricula" />
+		<br />
+		<br />
+	E-mail <h:inputText value="#{turmasBean.email}" required="true"
+			id="email" />
+		<br />
+		<br />
+		<h:commandButton action="#{turmasBean.matricular}" value="Matricular"></h:commandButton>
+	</h:form>
+</h:body>
+</html>

@@ -6,29 +6,59 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<head>
-<h:outputStylesheet library="css" name="style.css" />
-<h:outputStylesheet library="font-awesome" name="css/font-awesome.css" />
-</head>
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="font-awesome" name="css/font-awesome.css" />
+</h:head>
 
 <h:body>
-	<h:form>
-		<h:commandButton actionListener="#{turmasBean.listar}" value="Listar">
+	<h:form id="form_turmas">
 
-		</h:commandButton>
-		<h:dataTable values="#{turmasBean.turmas}" var="turma">
+		<h:commandButton action="#{turmasBean.listar}" value="Listar" />
+		<h:commandButton action="cadastro" value="Nova" />
+
+		<h:dataTable value="#{turmasBean.turmas}" var="turma"
+			rendered="#{not empty turmasBean.turmas}"
+			style="background-color:gray" rowClasses="greenRow,whiteRow"
+			cellpadding="5" cellspacing="1" headerClass="header" id="tab_turmas">
+
 			<h:column>
+				<h:selectBooleanCheckbox value="#{turmasBean.editavel[turma.id]}"
+					onclick="submit();" id="editando">
+				</h:selectBooleanCheckbox>
+			</h:column>
+			<h:column id="col_id">
 				<f:facet name="header">ID</f:facet>#{turma.id}
 			</h:column>
-			<h:column>
-				<f:facet name="header">Nome</f:facet>#{turma.nome}
+
+			<h:column id="col_nome">
+				<f:facet name="header">Nome</f:facet>
+
+				<h:commandLink value="#{turma.nome}"
+					action="#{turmasBean.listarMatriculados(turma)}"
+					rendered="#{not turmasBean.editavel[turma.id]}" id="output_Tnome">
+				</h:commandLink>
+
+				<h:inputText value="#{turma.nome}"
+					rendered="#{turmasBean.editavel[turma.id]}" id="input_Tnome" />
+				<h:commandButton action="#{turmasBean.salvar(turma)}" value="Salvar"
+					rendered="#{turmasBean.editavel[turma.id]}" id="bt_salvar" />
 			</h:column>
-			<h:column headerText="Data">
+
+			<h:column headerText="Data" id="col_data">
 				<h:outputText value="#{turma.dataCriacao}">
 					<f:convertDateTime dateStyle="medium">
 					</f:convertDateTime>
 				</h:outputText>
 			</h:column>
+
+			<h:column>
+				<h:commandLink action="#{turmasBean.excluir(turma)}" value="Excluir"
+					id="bt_excluir">
+
+				</h:commandLink>
+			</h:column>
+
 		</h:dataTable>
 	</h:form>
 </h:body>
