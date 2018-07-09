@@ -93,6 +93,12 @@
 							href="${pageContext.request.contextPath}/controller.do?op=LogoutComando"
 							id="link-submit"><i class="glyphicon glyphicon-log-out"></i>
 								Sair</a></li>
+
+						<li><a
+							href="${pageContext.request.contextPath}/usuario/alterar_senha.jsp"><i
+								class="glyphicon glyphicon-wrench"></i> Alterar senha</a></li>
+
+
 					</ul></li>
 			</ul>
 		</div>

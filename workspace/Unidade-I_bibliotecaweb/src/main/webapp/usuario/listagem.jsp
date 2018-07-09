@@ -48,15 +48,15 @@
 
 
 							<c:if test="${usuario.status}">
-								<td><a class="btn btn-danger btn-xs"  style="width:100%;"
+								<td><a class="btn btn-danger btn-xs" style="width: 100%;"
 									href="${pageContext.request.contextPath}/controller.do?op=DesativaUsuarioComando&id=${usuario.id}">Desativar</a></td>
 
-								<td><a class="btn btn-info btn-xs"  style="width:100%;"
+								<td><a class="btn btn-info btn-xs" style="width: 100%;"
 									href="${pageContext.request.contextPath}/controller.do?op=EditaUsuarioComando&id=${usuario.id}">Editar</a></td>
 							</c:if>
 
 							<c:if test="${not usuario.status}">
-								<td><a class="btn btn-success btn-xs" style="width:100%;"
+								<td><a class="btn btn-success btn-xs" style="width: 100%;"
 									href="${pageContext.request.contextPath}/controller.do?op=AtivaUsuarioComando&id=${usuario.id}">Ativar</a></td>
 							</c:if>
 						</tr>
@@ -67,6 +67,11 @@
 		<div style="text-align: right;">
 			<a href="usuario/cadastro.jsp" class="form-control btn btn-primary"
 				style="width: 10%;">Novo</a>
+		</div>
+		<div style="text-align: right;">
+			<br> <a style="width: 10%;"
+				href="${pageContext.request.contextPath}/exportarcontatos.do">Exportar
+				lista de usuários</a>
 		</div>
 		<c:if test="${not empty _msg}">
 			<ul style="list-style-type: none">

@@ -45,7 +45,7 @@
 						value="${cookie['loginCookie'].value}" maxlength="6" onkeyup="somenteNumeros(this);"/> <label
 						for="inputPassword" class="sr-only">Senha</label><br>
 					<input type="password" id="senha" name="senha" class="form-control"
-						placeholder="Senha" required />
+						placeholder="Senha" required maxlength="6"/>
 					<div class="checkbox">
 						<label> <input type="checkbox" value="sim" id="lembrar"
 							name="lembrar"> Lembrar-me

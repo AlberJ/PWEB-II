@@ -17,7 +17,7 @@ public class BibliotecawebContextListener implements ServletContextListener {
     }
 
     public void contextInitialized(ServletContextEvent e)  { 
-         emf = PersistenceUtil.createEntityManagerFactory("Unidade-I_bibliotecaweb");
+         emf = PersistenceUtil.createEntityManagerFactory("bibliotecaweb");
          System.out.println("Fábrica de EntityManagers construida!");
          
     }

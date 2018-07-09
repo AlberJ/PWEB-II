@@ -9,6 +9,15 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 
+import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import br.edu.ifpb.bibliotecaweb.dao.UsuarioDAO;
 import br.edu.ifpb.bibliotecaweb.entidade.Usuario;
 
@@ -312,5 +321,73 @@ public class UsuarioController {
 			resultado.setMensagens(this.mensagensErro);
 		}
 		return resultado;
+	}
+
+	@SuppressWarnings("unused")
+	public Resultado alterarSenha(Map<String, String[]> parameterMap) {
+		Usuario usuario = new Usuario();
+		Resultado resultado = new Resultado();
+
+		String[] p_senha = parameterMap.get("senha");
+		String[] p_nova_senha = parameterMap.get("nova_senha");
+		String[] P_confirma_senha = parameterMap.get("confirma_senha");
+		String[] P_id_usuario = parameterMap.get("id_usuario");
+
+		String senha = p_senha[0];
+		String nova_senha = p_nova_senha[0];
+		String confirma_senha = P_confirma_senha[0];
+
+		UsuarioDAO dao = new UsuarioDAO(entityManager);
+		usuario = dao.find(Integer.parseInt(P_id_usuario[0]));
+
+		if ((senha.equals(usuario.getSenha())) && (nova_senha.equals(confirma_senha))) {
+			usuario.setSenha(nova_senha);
+			dao.beginTransaction();
+			dao.update(usuario);
+			resultado.addMensagem("Senha Alterada com Sucesso");
+			resultado.setErro(false);
+			dao.commit();
+		} else {
+			resultado.addMensagem("Dados inválidos");
+			resultado.setErro(true);
+		}
+		return resultado;
+	}
+
+	public void exportarUsuarios(Map<String, String[]> parameterMap) {
+		UsuarioDAO dao = new UsuarioDAO(entityManager);
+		Document document = new Document();
+		document.open();
+		Font chapterFont = FontFactory.getFont(FontFactory.HELVETICA, 16, Font.BOLDITALIC);
+		Font paragraphFont = FontFactory.getFont(FontFactory.HELVETICA, 12, Font.NORMAL);
+
+		List<Usuario> usuarios = dao.findAll();
+		Chunk chunk = new Chunk("Dados informados :", chapterFont);
+		for (Usuario usuario : usuarios) {
+			String matricula = usuario.getMatricula();
+			String nome = usuario.getNome();
+			String email = usuario.getEmail();
+			String telefone = usuario.getFone();
+			String status;
+			if (usuario.getStatus()) {
+				status = "Ativo";
+			} else {
+				status = "Inativo";
+			}
+			Chapter chapter = new Chapter(new Paragraph(chunk), 1);
+			chapter.setNumberDepth(0);
+			chapter.add(new Paragraph("Matricula :" + matricula, paragraphFont));
+			chapter.add(new Paragraph("Nome :" + nome, paragraphFont));
+			chapter.add(new Paragraph("E-mail :" + email, paragraphFont));
+			chapter.add(new Paragraph("Telefone :" + telefone, paragraphFont));
+			chapter.add(new Paragraph("Status :" + status, paragraphFont));
+			try {
+				document.add(chapter);
+			} catch (DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		document.close();
 	}
 }
