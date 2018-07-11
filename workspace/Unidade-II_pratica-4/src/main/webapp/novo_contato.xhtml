@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="font-awesome" name="css/font-awesome.css" />
+</h:head>
+
+<h:body>
+	<h:panelGrid cellpadding="5" cellspacing="1"
+		style="margin-left:35%; margin-top:5%; padding:1px; border:solid; text-align:center">
+		<h:outputLabel id="label_contato" value="Cadastro de novo contato"
+			style="font-weight:bold; font-size:25pt"
+			rendered="#{empty contato.lb_editando}" />
+			<h:outputLabel id="label_edt_contato" value="Editando contato"
+			style="font-weight:bold; font-size:25pt" rendered="#{not empty contato.lb_editando}" />
+		<h:form id="cadastro_contato">
+			<h:messages></h:messages>
+			<h:panelGrid cellpadding="5" cellspacing="1"
+				style="margin-left:2%; width:100%; margin-right:25%; margin-top:5%; padding:1px; text-align:center"
+				columns="2">
+	            Nome <h:inputText id="nome" value="#{contato.nome}"
+					required="true" requiredMessage="Favor informe o nome do contato"
+					maxlength="50" />
+				Email <h:inputText id="email" value="#{contato.email}"
+					required="true" requiredMessage="Favor informe o E-mail do contato"
+					maxlength="30" />
+				Telefone <h:inputText id="telefone" value="#{contato.telefone}"
+					required="true"
+					requiredMessage="Favor informe o telefone do contato"
+					maxlength="15" />
+				<h:panelGrid></h:panelGrid>
+				<h:panelGrid style="width:100%; text-align:right">
+					<h:commandButton action="#{contato.salvarContato}" value="Salvar"
+						rendered="#{empty contato.bt_editando}" />
+					<h:commandButton action="#{contato.salvarContato}"
+						value="Salvar Alterações" rendered="#{not empty contato.bt_editando}" />
+				</h:panelGrid>
+			</h:panelGrid>
+		</h:form>
+
+	</h:panelGrid>
+</h:body>
+</html>

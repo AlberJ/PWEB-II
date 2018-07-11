@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="font-awesome" name="css/font-awesome.css" />
+</h:head>
+
+<h:body>
+	<h:panelGrid cellpadding="5" cellspacing="1"
+		style="margin-left:25%; margin-right:25%; padding:1px; border:solid; text-align:center">
+		<h:outputLabel value="Conversor de Temperaturas"
+			style="font-weight:bold; font-size:25pt">
+		</h:outputLabel>
+		<h:form>
+			<h:messages></h:messages>
+			<h:panelGrid columns="2" cellpadding="5" cellspacing="5"
+				borde-styler="solid">
+				<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+					<h:outputLabel value="Temperatura em °C" />
+					<h:inputText id="C" value="#{conversor.c}" style="width:20%;">
+						<f:validateDoubleRange minimum="-20" maximum="200"></f:validateDoubleRange>
+					</h:inputText>
+
+					<h:outputLabel value="Temperatura em °F" />
+					<h:inputText id="F" value="#{conversor.f}" style="width:20%;">
+						<f:validateDoubleRange minimum="-150" maximum="300"></f:validateDoubleRange>
+					</h:inputText>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+					<h:commandButton value="para F = "
+						action="#{conversor.converter(1)}" />
+					<h:inputText id="c_convertido" value="#{conversor.cConvertido}"
+						style="width:20%;">
+						<f:convertNumber maxFractionDigits="2" minFractionDigits="2"></f:convertNumber>
+					</h:inputText>
+					<h:commandButton value="para C = "
+						action="#{conversor.converter(2)}" />
+					<h:inputText id="f_convertido" value="#{conversor.fConvertido}"
+						style="width:20%;">
+						<f:convertNumber maxFractionDigits="2" minFractionDigits="2"></f:convertNumber>
+					</h:inputText>
+				</h:panelGrid>
+
+			</h:panelGrid>
+		</h:form>
+	</h:panelGrid>
+
+
+	<!-- 	SEGUNDA PARTE -->
+	<h:form>
+
+		<h:panelGrid cellpadding="5" cellspacing="1"
+			style="margin-left:25%; width:50%; margin-right:25%; margin-top:5%; padding:1px; border:solid; text-align:center">
+
+			<h:outputLabel value="Agenda de Contatos"
+				style="font-weight:bold; font-size:25pt">
+			</h:outputLabel>
+			<h:dataTable value="#{agenda.contatos}" var="c"
+				style="background-color:gray; width:100%"
+				rowClasses="greenRow,whiteRow" cellpadding="5" cellspacing="1"
+				headerClass="header" id="tab_contatos">
+
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{c.nome}"></h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Email</f:facet>
+					<h:outputText value="#{c.email}"></h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Telefone</f:facet>
+					<h:outputText value="#{c.telefone}"></h:outputText>
+				</h:column>
+
+				<h:column>
+					<h:commandLink value="Excluir" action="#{agenda.excluir(c)}"></h:commandLink>
+				</h:column>
+
+				<h:column>
+					<h:commandLink value="Editar" action="#{contato.editar(c)}">
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+			<h:commandButton value="Novo Contato" action="novo_contato"></h:commandButton>
+		</h:panelGrid>
+
+	</h:form>
+</h:body>
+</html>
